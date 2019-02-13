@@ -144,6 +144,14 @@ class HaWeatherCard extends LocalizeMixin(EventsMixin(PolymerElement)) {
         :host([rtl]) .precipitation {
           direction: ltr;
         }
+
+        .precipitation_probability {
+          color: var(--secondary-text-color);
+        }
+
+        :host([rtl]) .precipitation_probability {
+          direction: ltr;
+        }
       </style>
       <ha-card>
         <div class="header">
@@ -227,6 +235,15 @@ class HaWeatherCard extends LocalizeMixin(EventsMixin(PolymerElement)) {
                   <template is="dom-if" if="[[_showValue(item.precipitation)]]">
                     <div class="precipitation">
                       [[item.precipitation]] [[getUnit('precipitation')]]
+                    </div>
+                  </template>
+                  <template
+                    is="dom-if"
+                    if="[[_showValue(item.precipitation_probability)]]"
+                  >
+                    <div class="precipitation_probability">
+                      [[item.precipitation_probability]]
+                      [[getUnit('precipitation_probability')]]
                     </div>
                   </template>
                 </div>
@@ -316,6 +333,8 @@ class HaWeatherCard extends LocalizeMixin(EventsMixin(PolymerElement)) {
         return lengthUnit;
       case "precipitation":
         return lengthUnit === "km" ? "mm" : "in";
+      case "precipitation_probability":
+        return "%";
       default:
         return this.hass.config.unit_system[measure] || "";
     }
