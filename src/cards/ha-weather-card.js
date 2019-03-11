@@ -213,8 +213,19 @@ class HaWeatherCard extends LocalizeMixin(EventsMixin(PolymerElement)) {
                 <div>
                   <div class="weekday">
                     [[computeDate(item.datetime)]]<br />
-                    <template is="dom-if" if="[[!_showValue(item.templow)]]">
-                      [[computeTime(item.datetime)]]
+
+                    <template is="dom-if" if="[[!_isDaily(item)]]">
+                      <template is="dom-if" if="[[!_isDayNight(item)]]">
+                        [[computeTime(item.datetime)]]
+                      </template>
+                    </template>
+                    <template is="dom-if" if="[[_isDayNight(item)]]">
+                      <template is="dom-if" if="[[_isNight(item)]]">
+                        Night
+                      </template>
+                      <template is="dom-if" if="[[!_isNight(item)]]">
+                        <br />
+                      </template>
                     </template>
                   </div>
                   <template is="dom-if" if="[[_showValue(item.condition)]]">
@@ -380,6 +391,22 @@ class HaWeatherCard extends LocalizeMixin(EventsMixin(PolymerElement)) {
 
   _showValue(item) {
     return typeof item !== "undefined" && item !== null;
+  }
+
+  _isDaily(item) {
+    return typeof item.templow !== "undefined" && item.templow !== null;
+  }
+
+  _isHourly(isDaily, isDayNight) {
+    return !isDaily && !isDayNight;
+  }
+
+  _isDayNight(item) {
+    return typeof item.daytime !== "undefined" && item.daytime !== null;
+  }
+
+  _isNight(item) {
+    return !item.daytime;
   }
 
   computeDate(data) {
