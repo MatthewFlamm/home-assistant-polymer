@@ -250,12 +250,17 @@ class HaWeatherCard extends LocalizeMixin(EventsMixin(PolymerElement)) {
                   </template>
                   <template
                     is="dom-if"
-                    if="[[_showValue(item.precipitation_probability)]]"
+                    if="[[!_showValue(item.precipitation)]]"
                   >
-                    <div class="precipitation_probability">
-                      [[item.precipitation_probability]]
-                      [[getUnit('precipitation_probability')]]
-                    </div>
+                    <template
+                      is="dom-if"
+                      if="[[_showValue(item.precipitation_probability)]]"
+                    >
+                      <div class="precipitation_probability">
+                        [[item.precipitation_probability]]
+                        [[getUnit('precipitation_probability')]]
+                      </div>
+                    </template>
                   </template>
                 </div>
               </template>
