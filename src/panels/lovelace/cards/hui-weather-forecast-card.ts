@@ -214,12 +214,23 @@ class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
                             this.hass!.language,
                             { weekday: "short" }
                           )}<br />
-                          ${!this._showValue(item.templow)
+                          ${!this._showValue(item.templow) &&
+                          !this._showValue(item.daytime)
                             ? html`
                                 ${new Date(item.datetime).toLocaleTimeString(
                                   this.hass!.language,
                                   { hour: "numeric" }
                                 )}
+                              `
+                            : !this._showValue(item.templow) &&
+                              this._showValue(item.daytime) &&
+                              !item.daytime
+                            ? "Night"
+                            : !this._showValue(item.templow) &&
+                              this._showValue(item.daytime) &&
+                              item.daytime
+                            ? html`
+                                <br />
                               `
                             : ""}
                         </div>
