@@ -46,7 +46,7 @@ const cardinalDirections = [
 ];
 
 const weatherIcons = {
-  "clear-night": "hass:weather-night",
+  clear: "hass:weather-sunny",
   cloudy: "hass:weather-cloudy",
   exceptional: "hass:alert-circle-outline",
   fog: "hass:weather-fog",
@@ -58,7 +58,6 @@ const weatherIcons = {
   rainy: "hass:weather-rainy",
   snowy: "hass:weather-snowy",
   "snowy-rainy": "hass:weather-snowy-rainy",
-  sunny: "hass:weather-sunny",
   windy: "hass:weather-windy",
   "windy-variant": "hass:weather-windy-variant",
 };
@@ -66,9 +65,7 @@ const weatherIcons = {
 @customElement("hui-weather-forecast-card")
 class HuiWeatherForecastCard extends LitElement implements LovelaceCard {
   public static async getConfigElement(): Promise<LovelaceCardEditor> {
-    await import(
-      /* webpackChunkName: "hui-weather-forecast-card-editor" */ "../editor/config-elements/hui-weather-forecast-card-editor"
-    );
+    await import(/* webpackChunkName: "hui-weather-forecast-card-editor" */ "../editor/config-elements/hui-weather-forecast-card-editor");
     return document.createElement("hui-weather-forecast-card-editor");
   }
   public static getStubConfig(): object {

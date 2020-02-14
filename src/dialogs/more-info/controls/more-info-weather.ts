@@ -33,7 +33,7 @@ const cardinalDirections = [
 ];
 
 const weatherIcons = {
-  "clear-night": "hass:weather-night",
+  sunny: "hass:weather-sunny",
   cloudy: "hass:weather-cloudy",
   exceptional: "hass:alert-circle-outline",
   fog: "hass:weather-fog",
@@ -45,7 +45,6 @@ const weatherIcons = {
   rainy: "hass:weather-rainy",
   snowy: "hass:weather-snowy",
   "snowy-rainy": "hass:weather-snowy-rainy",
-  sunny: "hass:weather-sunny",
   windy: "hass:weather-windy",
   "windy-variant": "hass:weather-windy-variant",
 };
